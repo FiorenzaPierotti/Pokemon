@@ -1,0 +1,171 @@
+.loader {
+  margin: 20% auto;
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #3498db;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite;
+  /* Safari */
+  animation: spin 1.4s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.wrapper {
+  display: none;
+}
+
+img.card-img-top {
+  height: 96px;
+  width: 96px;
+  margin: 20px auto;
+}
+
+a {
+  transition: 1s;
+  cursor: pointer;
+}
+a:hover {
+  background-color: lightblue;
+  color: #040436;
+  text-decoration: none;
+}
+
+/* =============
+Specific pokemon
+============= */
+.card.card-poke {
+  max-width: 500px;
+  margin: 3% auto;
+  display: none;
+}
+
+.pokemon {
+  position: relative;
+}
+
+.badge-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.badge {
+  text-transform: capitalize;
+  padding: 10px;
+  margin: 5px;
+  color: white;
+}
+
+.badge-flying {
+  background-color: #2196f5;
+}
+
+.badge-normal {
+  background-color: #78db95;
+}
+
+.badge-fighting {
+  background-color: #c20707;
+}
+
+.badge-poison {
+  background-color: #ef40ff;
+}
+
+.badge-ground {
+  background-color: #72471a;
+}
+
+.badge-rock {
+  background-color: #686d69;
+}
+
+.badge-bug {
+  background-color: #57a06d;
+}
+
+.badge-ghost {
+  background-color: #a6c1d1;
+}
+
+.badge-steel {
+  background-color: #bac0bc;
+}
+
+.badge-fire {
+  background-color: #f00c0c;
+}
+
+.badge-water {
+  background-color: #84dada;
+}
+
+.badge-grass {
+  background-color: #3cbe3c;
+}
+
+.badge-electric {
+  background-color: #f1db15;
+}
+
+.badge-psychic {
+  background-color: #f30acc;
+}
+
+.badge-ice {
+  background-color: #cbdce6;
+}
+
+.badge-dragon {
+  background-color: #e91140;
+}
+
+.badge-dark {
+  background-color: black;
+}
+
+.badge-fairy {
+  background-color: #00a063;
+}
+
+.badge-unknown {
+  background-color: #5d6634;
+}
+
+.badge-shadow {
+  background-color: #ff6913;
+}
+
+.fas.fa-arrow-alt-circle-left {
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  color: #83d3ee;
+  transition: 1s;
+  cursor: pointer;
+}
+.fas.fa-arrow-alt-circle-left:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=style.css.map */

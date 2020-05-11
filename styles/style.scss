@@ -1,0 +1,113 @@
+$link-color: rgb(131, 211, 238);
+$hover-color: rgb(4, 4, 54);
+
+@mixin loader {
+    .loader {
+        margin: 20% auto;
+        border: 10px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 10px solid #3498db;
+        width: 40px;
+        height: 40px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1.4s linear infinite;
+    }
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+}
+
+@include loader;
+
+.wrapper {
+    display: none;
+}
+img.card-img-top{
+    height: 96px;
+    width: 96px;
+    margin: 20px auto;
+} 
+a{
+    transition: 1s;
+    cursor: pointer;
+    &:hover{
+        background-color: lightblue;
+        color:$hover-color;
+        text-decoration: none;
+    }
+} 
+
+/* =============
+Specific pokemon
+============= */
+
+.card.card-poke{
+    max-width: 500px;
+    margin: 3% auto;
+    display: none;
+}
+.pokemon{
+    position:relative;
+}
+.badge-wrapper{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.badge{
+    text-transform: capitalize;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+}
+
+$listmap: ( 
+    flying: rgb(33, 150, 245),
+    normal: rgb(120, 219, 149),
+    fighting: rgb(194, 7, 7),
+    poison: rgb(239, 64, 255),
+    ground: rgb(114, 71, 26),
+    rock: rgb(104, 109, 105),
+    bug: rgb(87, 160, 109),
+    ghost: rgb(166, 193, 209),
+    steel: rgb(186, 192, 188),
+    fire: rgb(240, 12, 12),
+    water: rgb(132, 218, 218),
+    grass: rgb(60, 190, 60),
+    electric: rgb(241, 219, 21),
+    psychic: rgb(243, 10, 204),
+    ice: rgb(203, 220, 230),
+    dragon: rgb(233, 17, 64),
+    dark: rgb(0, 0, 0),
+    fairy: rgb(0, 160, 99),
+    unknown: rgb(93, 102, 52),
+    shadow: rgb(255, 105, 19)
+);    
+
+@each $class,$color in $listmap {
+    .badge-#{$class} {
+        background-color: $color;
+    }
+}
+// arrow to go back
+.fas.fa-arrow-alt-circle-left{
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    color: $link-color;
+    transition: 1s;
+    cursor: pointer;
+    &:hover{
+        background-color: transparent;
+        text-decoration: none;
+    }
+}
