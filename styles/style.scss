@@ -1,5 +1,6 @@
 $link-color: rgb(131, 211, 238);
 $hover-color: rgb(4, 4, 54);
+$text-color:#212529;
 
 @mixin loader {
     .loader {
@@ -113,8 +114,12 @@ $types: (
 .ability{
     display:inline-flex;
     font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
     &:not(:last-child):after{
-        content: ',\00a0';
+        content: '\00a0'+'/'+'\00a0';
+        color:$text-color;
+        font-weight: normal;
     }
 }
 

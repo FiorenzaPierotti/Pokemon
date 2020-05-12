@@ -171,9 +171,13 @@ Specific pokemon
 .ability {
   display: inline-flex;
   font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 .ability:not(:last-child):after {
-  content: ", ";
+  content: " / ";
+  color: #212529;
+  font-weight: normal;
 }
 
 .ability-1 {
