@@ -36,7 +36,7 @@ function init(ciao) {
         const def = poke.is_default;
         const order = poke.order;
         const weight = poke.weight;
-        const image = poke.sprites.front_default;        
+        const image = poke.sprites.front_default;         
 
         /*const values = [
             {experience:experience}, 
@@ -51,12 +51,12 @@ function init(ciao) {
         li.innerHTML = keys[0]+': '+values[i][keys[0]];*/
 
         const val2 = [
-            {label:'experience', value: experience},
-            {label:'height', value: height},
-            {label:'id', value: id},
-            {label:'default', value: def},
-            {label:'order', value: order},
-            {label:'weight', value: weight},
+            {label:'Experience', value: experience},
+            {label:'Height', value: height},
+            {label:'Id', value: id},
+            {label:'Default', value: def},
+            {label:'Order', value: order},
+            {label:'Weight', value: weight},
         ]
 
         console.log(name, experience, height, id, def, order, weight, image);
@@ -79,7 +79,7 @@ function init(ciao) {
 
         for (i= 0; i<poke.types.length; i++) { 
             type = poke.types[i].type.name           
-            span = document.createElement('span');
+            span = document.createElement('div');
             span.classList.add('badge', 'badge-'+type);            
             span.innerHTML = type;
             divbadge.appendChild(span);
@@ -91,6 +91,19 @@ function init(ciao) {
         const ul = document.createElement('ul');
         ul.classList.add('list-group', 'm-3');
         divcard.appendChild(ul);
+
+        const li = document.createElement('li');
+        li.classList.add('list-group-item');             
+        li.innerHTML = 'Abilities: ';
+        ul.appendChild(li);        
+        for (i= 0; i<poke.abilities.length; i++) { 
+            const span = document.createElement('span');            
+            ability = poke.abilities[i].ability.name;
+            span.classList.add('ability', 'ability-'+[i]);
+            span.innerHTML = ability.replace("-", " ");            
+            li.appendChild(span);
+        }
+
         for (i= 0; i<val2.length; i++) {
             const li = document.createElement('li');
             li.classList.add('list-group-item'); 

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .loader {
   margin: 20% auto;
   border: 10px solid #f3f3f3;
@@ -68,7 +69,6 @@ Specific pokemon
 
 .badge {
   text-transform: capitalize;
-  padding: 10px;
   margin: 5px;
   color: white;
 }
@@ -166,6 +166,34 @@ Specific pokemon
 .fas.fa-arrow-alt-circle-left:hover {
   background-color: transparent;
   text-decoration: none;
+}
+
+.ability {
+  display: inline-flex;
+  font-weight: bold;
+}
+.ability:not(:last-child):after {
+  content: ", ";
+}
+
+.ability-0 {
+  color: #bf4040;
+}
+
+.ability-1 {
+  color: #80bf40;
+}
+
+.ability-2 {
+  color: #40bfbf;
+}
+
+.ability-3 {
+  color: #8040bf;
+}
+
+.ability-4 {
+  color: #bf4040;
 }
 
 /*# sourceMappingURL=style.css.map */

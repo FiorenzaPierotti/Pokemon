@@ -63,12 +63,11 @@ Specific pokemon
 }
 .badge{
     text-transform: capitalize;
-    padding: 10px;
     margin: 5px;
     color: white;
 }
 
-$listmap: ( 
+$types: ( 
     flying: rgb(33, 150, 245),
     normal: rgb(120, 219, 149),
     fighting: rgb(194, 7, 7),
@@ -91,7 +90,7 @@ $listmap: (
     shadow: rgb(255, 105, 19)
 );    
 
-@each $class,$color in $listmap {
+@each $class,$color in $types {
     .badge-#{$class} {
         background-color: $color;
     }
@@ -111,3 +110,41 @@ $listmap: (
         text-decoration: none;
     }
 }
+.ability{
+    display:inline-flex;
+    font-weight: bold;
+    &:not(:last-child):after{
+        content: ',\00a0';
+    }
+}
+
+$pokemon: 4;
+$degs: 360;
+$moltiplicator: $degs/$pokemon;
+
+@for $i from 0 through 4 {
+    .ability-#{$i}{
+        color: hsl(($i * $moltiplicator), 50%, 50%);
+    }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
