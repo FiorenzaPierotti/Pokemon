@@ -78,7 +78,7 @@ function init(ciao) {
         divbadge.classList.add('badge-wrapper');
 
         for (i= 0; i<poke.types.length; i++) { 
-            type = poke.types[i].type.name           
+            const type = poke.types[i].type.name        
             span = document.createElement('div');
             span.classList.add('badge', 'badge-'+type);            
             span.innerHTML = type;
@@ -97,9 +97,10 @@ function init(ciao) {
         li.innerHTML = 'Abilities: ';
         ul.appendChild(li);        
         for (i= 0; i<poke.abilities.length; i++) { 
-            const span = document.createElement('span');            
+            const span = document.createElement('span');              
+            const numAbility = poke.abilities[i].ability.url.slice(34, -1);             
             ability = poke.abilities[i].ability.name;
-            span.classList.add('ability', 'ability-'+[i]);
+            span.classList.add('ability', 'ability-'+numAbility);
             span.innerHTML = ability.replace("-", " ");            
             li.appendChild(span);
         }

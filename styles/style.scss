@@ -118,13 +118,13 @@ $types: (
     }
 }
 
-$pokemon: 4;
+$pokemon: 293;
 $degs: 360;
 $moltiplicator: $degs/$pokemon;
 
-@for $i from 0 through 4 {
+@for $i from 1 through 293 {
     .ability-#{$i}{
-        color: hsl(($i * $moltiplicator), 50%, 50%);
+        color: hsl(($i * $moltiplicator), 90%, 50%);
     }
 } 
 
