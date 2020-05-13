@@ -99,12 +99,12 @@ function scrollP(name){
             const image = poke.sprites.front_default;   
 
             const val2 = [
-                {label:'experience', value: experience},
-                {label:'height', value: height},
-                {label:'id', value: id},
-                {label:'default', value: def},
-                {label:'order', value: order},
-                {label:'weight', value: weight},
+                {label:'Experience', value: experience},
+                {label:'Eeight', value: height},
+                {label:'Id', value: id},
+                {label:'Default', value: def},
+                {label:'Order', value: order},
+                {label:'Weight', value: weight},
             ]
             
             const text = document.createTextNode(name);
@@ -137,6 +137,20 @@ function scrollP(name){
             const ul = document.createElement('ul');
             ul.classList.add('list-group', 'm-3');
             divcard.appendChild(ul);
+
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');             
+            li.innerHTML = 'Abilities: '+'<br>';
+            ul.appendChild(li);        
+            for (i= 0; i<poke.abilities.length; i++) { 
+                const span = document.createElement('span');              
+                const numAbility = poke.abilities[i].ability.url.slice(34, -1);             
+                ability = poke.abilities[i].ability.name;
+                span.classList.add('ability', 'ability-'+numAbility);
+                span.innerHTML = ability.replace("-", " ");            
+                li.appendChild(span);
+            }
+
             for (i= 0; i<val2.length; i++) {
                 const li = document.createElement('li');
                 li.classList.add('list-group-item'); 
