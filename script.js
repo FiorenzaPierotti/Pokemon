@@ -131,7 +131,6 @@ function scrollP(name){
                 divbadge.appendChild(span);
                 divcard.appendChild(divbadge);
                 const types = poke.types[i].type.name;
-                console.log(types);
             }
 
             const ul = document.createElement('ul');
@@ -173,5 +172,5 @@ function myFunction(){
 }
 
 function goBack(){
-    window.history.back();
+    location.reload();
 }
