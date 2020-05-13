@@ -38,7 +38,7 @@ function init(obj) {
 
 
         a.addEventListener('click', function(){
-            scrollP(name);
+            onClick(name);
         });
 
         const divtitle = document.createElement('div');
@@ -59,14 +59,14 @@ function init(obj) {
     document.querySelector('.card-poke').style.display = 'none';
     document.querySelector('.wrapper').style.display = 'flex'; // mostra la card quando la pagina è caricata
     document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata 
-    document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
-   
+    document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');    
 };
 
-function scrollP(name){ 
+function onClick(name){ 
     var scrollPosition = document.querySelector('html').scrollTop;
     localStorage.setItem('scrollPosition', scrollPosition);
     
+
     fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
     console.dir(result)
     
@@ -161,7 +161,8 @@ function scrollP(name){
         document.querySelector('.wrapper').style.display = 'none';
         document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
         document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
-        create(ciao);       
+        window.scrollTo(0,0);
+        create(ciao); 
     };    
 };
 
