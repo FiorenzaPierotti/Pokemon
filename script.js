@@ -38,7 +38,7 @@ function init(obj) {
 
 
         a.addEventListener('click', function(){
-            scrollP(name);
+            onClick(name);
         });
 
         const divtitle = document.createElement('div');
@@ -63,7 +63,7 @@ function init(obj) {
    
 };
 
-function scrollP(name){ 
+function onClick(name){ 
     var scrollPosition = document.querySelector('html').scrollTop;
     localStorage.setItem('scrollPosition', scrollPosition);
     
@@ -161,6 +161,7 @@ function scrollP(name){
         document.querySelector('.wrapper').style.display = 'none';
         document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
         document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
+        window.scrollTo(0,0);
         create(ciao);       
     };    
 };
