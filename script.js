@@ -78,37 +78,6 @@ function onClick(name){
     const index = window.location.href+'?'+qs; 
     
     doFetch(name);
-
-    /*const specifics = { 
-        abilities,
-        base_experience,
-        forms,
-        game_indices,
-        height,
-        held_items,
-        id,
-        is_default,
-        location_area_encounters,
-        moves,
-        name,
-        order,
-        species,
-        sprites,
-        stats,
-        types,
-        weight
-    };
-    
-    const oneFetch = (e) => {
-        if (!name) {
-            doFetch(name);
-        } else {
-            !doFetch();
-        }
-    }
-    debugger
-
-    return oneFetch;*/
 }
 
 function doFetch(name) {
@@ -141,7 +110,7 @@ function doFetch(name) {
             const def = poke.is_default;
             const order = poke.order;
             const weight = poke.weight;
-            const image = poke.sprites.front_default;   
+            const image = poke.sprites.front_default;  
 
             const val2 = [
                 {label:'Experience', value: experience},
