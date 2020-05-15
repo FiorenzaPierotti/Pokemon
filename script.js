@@ -51,7 +51,7 @@ function init(obj) {
         h6.appendChild(text);        
 
         return divcol;
-        };
+        });
     
     obj.results.map(pokemon => create(pokemon)).forEach(divcol => document.querySelector('.row').appendChild(divcol));
     document.querySelector('.card-poke').style.display = 'none';
@@ -202,4 +202,5 @@ function replaceDiv(){
             '<a class="fas fa-arrow-alt-circle-left" onclick="goBack()"></a>'+
         '</div>'+
     '</div>';
+}
 }
