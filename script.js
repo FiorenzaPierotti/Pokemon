@@ -36,9 +36,8 @@ function init(obj) {
         image.alt = name;
         a.appendChild(img);
 
-
         a.addEventListener('click', function(){
-            onClick(name);
+            onClick(name, pokemon);
         });
 
         const divtitle = document.createElement('div');
@@ -63,10 +62,56 @@ function init(obj) {
 };
 
 function onClick(name){ 
-    var scrollPosition = document.querySelector('html').scrollTop;
+    const scrollPosition = document.querySelector('html').scrollTop;
     localStorage.setItem('scrollPosition', scrollPosition);
-    
 
+    const urlParams = new URLSearchParams();
+    urlParams.set('pokemon', name);
+    const qs = urlParams.toString();
+
+    const state = { 'pokemon': 1 }
+    const title = name
+    const url = 'index.html?'+qs;
+
+    window.history.pushState(state, title, url);
+
+    const index = window.location.href+'?'+qs; 
+    
+    doFetch(name);
+
+    /*const specifics = { 
+        abilities,
+        base_experience,
+        forms,
+        game_indices,
+        height,
+        held_items,
+        id,
+        is_default,
+        location_area_encounters,
+        moves,
+        name,
+        order,
+        species,
+        sprites,
+        stats,
+        types,
+        weight
+    };
+    
+    const oneFetch = (e) => {
+        if (!name) {
+            doFetch(name);
+        } else {
+            !doFetch();
+        }
+    }
+    debugger
+
+    return oneFetch;*/
+}
+
+function doFetch(name) {
     fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
     console.dir(result)
     
@@ -140,7 +185,8 @@ function onClick(name){
             const li = document.createElement('li');
             li.classList.add('list-group-item');             
             li.innerHTML = 'Abilities: '+'<br>';
-            ul.appendChild(li);        
+            ul.appendChild(li); 
+                    
             for (i= 0; i<poke.abilities.length; i++) { 
                 const span = document.createElement('span');              
                 const numAbility = poke.abilities[i].ability.url.slice(34, -1);             
@@ -161,9 +207,9 @@ function onClick(name){
         document.querySelector('.wrapper').style.display = 'none';
         document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
         document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
-        window.scrollTo(0,0);
+        window.scrollTo(0,0);                       
         create(ciao); 
-    };    
+    };     
 };
 
 function myFunction(){
@@ -172,6 +218,19 @@ function myFunction(){
     document.querySelector('body').appendChild(div);     
 }
 
-function goBack(){
-    location.reload();
+function goBack(){    
+    document.querySelector('.wrapper').style.display = 'flex';
+    document.querySelector('.card-poke').style.display = 'none';   
+    replaceDiv(); 
+    history.back();    
+}
+
+function replaceDiv(){
+    var old_element = document.querySelector('.specific-poke');
+    old_element.innerHTML = 
+    '<div class="card card-poke">'+
+        '<div class="card-header text-uppercase font-weight-bold text-center pokemon">'+
+            '<a class="fas fa-arrow-alt-circle-left" onclick="goBack()"></a>'+
+        '</div>'+
+    '</div>';
 }
