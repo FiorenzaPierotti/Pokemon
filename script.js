@@ -38,7 +38,8 @@ function init(obj) {
         a.appendChild(img);
 
         a.addEventListener('click', function(){
-        onClick(name);
+            onClick(name, pokemon);
+        });
 
         const divtitle = document.createElement('div');
         divtitle.classList.add('card-body', 'p-2');
@@ -52,7 +53,7 @@ function init(obj) {
         h6.appendChild(text);        
 
         return divcol;
-        });
+    };
     
     obj.results.map(pokemon => create(pokemon)).forEach(divcol => document.querySelector('.row').appendChild(divcol));
     
@@ -64,7 +65,7 @@ function init(obj) {
 };
 
 function onClick(name){ 
-    var scrollPosition = document.querySelector('html').scrollTop;
+    const scrollPosition = document.querySelector('html').scrollTop;
     localStorage.setItem('scrollPosition', scrollPosition);
 
     /*const urlParams = new URLSearchParams();
@@ -184,10 +185,9 @@ function doFetch(name) {
         document.querySelector('.wrapper').style.display = 'none';
         document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
         document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
-
-        window.scrollTo(0,0);
-        create(ciao);       
-    };    
+        window.scrollTo(0,0);                       
+        create(ciao); 
+    };     
 };
 
 function myFunction(){
