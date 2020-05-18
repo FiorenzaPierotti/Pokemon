@@ -1,6 +1,4 @@
-let pokemons = {
-
-};
+let pokemons = {};
 
 fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=606').then(result => {
     console.dir(result)
@@ -66,7 +64,6 @@ function init(obj) {
     document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');    
 };
 
-
 function onClick(name){ 
     const scrollPosition = document.querySelector('html').scrollTop;
     localStorage.setItem('scrollPosition', scrollPosition);
@@ -87,10 +84,10 @@ function onClick(name){
 }
 
 function doFetch(name) {
-    debugger
+
     if (pokemons[name]){
         init(pokemons[name])
-    }
+    } 
     else {
         fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
         console.dir(result)
@@ -113,10 +110,6 @@ function doFetch(name) {
         }) 
     }
        
-
-    /*let pokemonS = {
-        name : name.name        
-    }*/
     function init(ciao) {  
         const create = (poke) =>{
             const name = poke.name;
@@ -194,8 +187,6 @@ function doFetch(name) {
         document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
         window.scrollTo(0,0);                       
         create(ciao); 
-
-        //return pokemonS;
     };     
 };
 
