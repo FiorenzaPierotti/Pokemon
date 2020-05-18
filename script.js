@@ -1,3 +1,5 @@
+let pokemons = {};
+
 fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=606').then(result => {
     console.dir(result)
     if(result.ok){
@@ -11,8 +13,7 @@ fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=606').then(result => {
     }
 }).then( json =>{
     console.log(json);
-    init(json);
-    
+    init(json);    
     
 }).catch(err => {
     console.log(err);
@@ -54,9 +55,11 @@ function init(obj) {
         });
     
     obj.results.map(pokemon => create(pokemon)).forEach(divcol => document.querySelector('.row').appendChild(divcol));
+    
     document.querySelector('.card-poke').style.display = 'none';
     document.querySelector('.wrapper').style.display = 'flex'; // mostra la card quando la pagina è caricata
     document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata 
+    
     document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');    
 };
 
@@ -64,7 +67,7 @@ function onClick(name){
     var scrollPosition = document.querySelector('html').scrollTop;
     localStorage.setItem('scrollPosition', scrollPosition);
 
-    const urlParams = new URLSearchParams();
+    /*const urlParams = new URLSearchParams();
     urlParams.set('pokemon', name);
     const qs = urlParams.toString();
 
@@ -74,33 +77,39 @@ function onClick(name){
 
     window.history.pushState(state, title, url);
 
-    const index = window.location.href+'?'+qs; 
-    
+    const index = window.location.href+'?'+qs;*/  
+
     doFetch(name);
 }
 
 function doFetch(name) {
-    fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
-    console.dir(result)
-    
-    if(result.ok){
-        if( result.headers.get('Content-Type').includes('application/json')){
-        return result.json()
-        } 
-        throw new Error('response type is not json');
 
-    } else {
-        throw new Error('response failed');
+    if (pokemons[name]){
+        init(pokemons[name])
+    } 
+    else {
+        fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
+        console.dir(result)
+        
+        if(result.ok){
+            if( result.headers.get('Content-Type').includes('application/json')){
+            return result.json()
+            } 
+            throw new Error('response type is not json');
+
+        } else {
+            throw new Error('response failed');
+        }
+        }).then( json =>{
+        console.log(json);
+        pokemons[name] = json
+        init(json);
+        }).catch(err => {
+        console.log(err);
+        }) 
     }
-    }).then( json =>{
-    console.log(json);
-    init(json);
-    }).catch(err => {
-    console.log(err);
-    })    
-
-    function init(ciao) {   
-
+       
+    function init(ciao) {  
         const create = (poke) =>{
             const name = poke.name;
             const experience = poke.base_experience;
@@ -184,7 +193,7 @@ function doFetch(name) {
 function myFunction(){
     const div = document.createElement('div');
     div.classList.add('loader');
-    document.querySelector('body').appendChild(div);     
+    document.querySelector('body').appendChild(div);    
 }
 
 function goBack(){    
@@ -202,5 +211,4 @@ function replaceDiv(){
             '<a class="fas fa-arrow-alt-circle-left" onclick="goBack()"></a>'+
         '</div>'+
     '</div>';
-}
 }
