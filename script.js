@@ -38,7 +38,7 @@ function init(obj) {
         a.appendChild(img);
 
         a.addEventListener('click', function(){
-            onClick(name, pokemon);
+            onClick(pokemon);
         });
 
         const divtitle = document.createElement('div');
@@ -59,34 +59,21 @@ function init(obj) {
     
     document.querySelector('.card-poke').style.display = 'none';
     document.querySelector('.wrapper').style.display = 'flex'; // mostra la card quando la pagina è caricata
-    document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata 
-    
-    document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');    
+    document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata     
 };
 
-function onClick(name){ 
+function onClick(pokemon){ 
     const scrollPosition = document.querySelector('html').scrollTop;
-    localStorage.setItem('scrollPosition', scrollPosition);
+    localStorage.setItem('scrollPosition', scrollPosition); 
 
-    /*const urlParams = new URLSearchParams();
-    urlParams.set('pokemon', name);
-    const qs = urlParams.toString();
-
-    const state = { 'pokemon': 1 }
-    const title = name
-    const url = 'index.html?'+qs;
-
-    window.history.pushState(state, title, url);
-
-    const index = window.location.href+'?'+qs;*/  
-
-    doFetch(name);
+    doSinglePokemonFetch(pokemon.name);
 }
 
-function doFetch(name) {
+function doSinglePokemonFetch(name) {
 
     if (pokemons[name]){
-        init(pokemons[name])
+        singlePokemonCard(pokemons[name])
+        whileLoading();
     } 
     else {
         fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
@@ -104,93 +91,93 @@ function doFetch(name) {
         }).then( json =>{
         console.log(json);
         pokemons[name] = json
-        init(json);
+        singlePokemonCard(json);
+        whileLoading();
         }).catch(err => {
         console.log(err);
         }) 
-    }
-       
-    function init(ciao) {  
-        const create = (poke) =>{
-            const name = poke.name;
-            const experience = poke.base_experience;
-            const height = poke.height;
-            const id = poke.id;
-            const def = poke.is_default;
-            const order = poke.order;
-            const weight = poke.weight;
-            const image = poke.sprites.front_default;  
-
-            const val2 = [
-                {label:'Experience', value: experience},
-                {label:'Eeight', value: height},
-                {label:'Id', value: id},
-                {label:'Default', value: def},
-                {label:'Order', value: order},
-                {label:'Weight', value: weight},
-            ]
-            
-            const text = document.createTextNode(name);
-
-            const div = document.querySelector('.pokemon');        
-            div.appendChild(text);
-
-            const divcard = document.querySelector('.card-poke');        
-
-            const img = document.createElement('img');
-            img.classList.add('card-img-top');
-            img.src = (image);
-            image.alt = name;
-            divcard.appendChild(img);
-
-            divbadge = document.createElement('div');
-            divbadge.classList.add('badge-wrapper');
-
-            for (i= 0; i<poke.types.length; i++) { 
-                type = poke.types[i].type.name           
-                span = document.createElement('span');
-                span.classList.add('badge', 'badge-'+type);            
-                span.innerHTML = type;
-                divbadge.appendChild(span);
-                divcard.appendChild(divbadge);
-                const types = poke.types[i].type.name;
-            }
-
-            const ul = document.createElement('ul');
-            ul.classList.add('list-group', 'm-3');
-            divcard.appendChild(ul);
-
-            const li = document.createElement('li');
-            li.classList.add('list-group-item');             
-            li.innerHTML = 'Abilities: '+'<br>';
-            ul.appendChild(li); 
-                    
-            for (i= 0; i<poke.abilities.length; i++) { 
-                const span = document.createElement('span');              
-                const numAbility = poke.abilities[i].ability.url.slice(34, -1);             
-                ability = poke.abilities[i].ability.name;
-                span.classList.add('ability', 'ability-'+numAbility);
-                span.innerHTML = ability.replace("-", " ");            
-                li.appendChild(span);
-            }
-
-            for (i= 0; i<val2.length; i++) {
-                const li = document.createElement('li');
-                li.classList.add('list-group-item'); 
-                li.innerHTML = val2[i].label+': '+val2[i].value;
-                ul.appendChild(li);
-            }          
-        };
-
-        document.querySelector('.wrapper').style.display = 'none';
-        document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
-        document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
-        window.scrollTo(0,0);                       
-        create(ciao); 
-    };     
+    }           
 };
 
-function myFunction(){
+function singlePokemonCard(pokemonDetail) {
+    const name = pokemonDetail.name;
+    const experience = pokemonDetail.base_experience;
+    const height = pokemonDetail.height;
+    const id = pokemonDetail.id;
+    const def = pokemonDetail.is_default;
+    const order = pokemonDetail.order;
+    const weight = pokemonDetail.weight;
+    const image = pokemonDetail.sprites.front_default;  
+
+    const val2 = [
+        {label:'Experience', value: experience},
+        {label:'Eeight', value: height},
+        {label:'Id', value: id},
+        {label:'Default', value: def},
+        {label:'Order', value: order},
+        {label:'Weight', value: weight},
+    ]
+    
+    const text = document.createTextNode(name);
+
+    const div = document.querySelector('.pokemon');        
+    div.appendChild(text);
+
+    const divcard = document.querySelector('.card-poke');        
+
+    const img = document.createElement('img');
+    img.classList.add('card-img-top');
+    img.src = (image);
+    image.alt = name;
+    divcard.appendChild(img);
+
+    divbadge = document.createElement('div');
+    divbadge.classList.add('badge-wrapper');
+
+    for (i= 0; i<pokemonDetail.types.length; i++) { 
+        type = pokemonDetail.types[i].type.name           
+        span = document.createElement('span');
+        span.classList.add('badge', 'badge-'+type);            
+        span.innerHTML = type;
+        divbadge.appendChild(span);
+        divcard.appendChild(divbadge);
+        const types = pokemonDetail.types[i].type.name;
+    }
+
+    const ul = document.createElement('ul');
+    ul.classList.add('list-group', 'm-3');
+    divcard.appendChild(ul);
+
+    const li = document.createElement('li');
+    li.classList.add('list-group-item');             
+    li.innerHTML = 'Abilities: '+'<br>';
+    ul.appendChild(li); 
+            
+    for (i= 0; i<pokemonDetail.abilities.length; i++) { 
+        const span = document.createElement('span');              
+        const numAbility = pokemonDetail.abilities[i].ability.url.slice(34, -1);             
+        ability = pokemonDetail.abilities[i].ability.name;
+        span.classList.add('ability', 'ability-'+numAbility);
+        span.innerHTML = ability.replace("-", " ");            
+        li.appendChild(span);
+    }
+
+    for (i= 0; i<val2.length; i++) {
+        const li = document.createElement('li');
+        li.classList.add('list-group-item'); 
+        li.innerHTML = val2[i].label+': '+val2[i].value;
+        ul.appendChild(li);
+    } 
+};
+
+function whileLoading() {
+    document.querySelector('.wrapper').style.display = 'none';
+    document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
+    document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
+    window.scrollTo(0,0);
+}
+
+function loader(){
     const div = document.createElement('div');
     div.classList.add('loader');
     document.querySelector('body').appendChild(div);    
@@ -199,11 +186,12 @@ function myFunction(){
 function goBack(){    
     document.querySelector('.wrapper').style.display = 'flex';
     document.querySelector('.card-poke').style.display = 'none';   
-    replaceDiv(); 
+    emptySinglePokemonCard(); 
     history.back();    
+    document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');
 }
 
-function replaceDiv(){
+function emptySinglePokemonCard(){
     var old_element = document.querySelector('.specific-poke');
     old_element.innerHTML = 
     '<div class="card card-poke">'+
