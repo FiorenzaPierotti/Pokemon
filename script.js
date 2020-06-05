@@ -73,7 +73,7 @@ function doSinglePokemonFetch(name) {
 
     if (pokemons[name]){
         singlePokemonCard(pokemons[name])
-        whileLoading();
+        loaded();
     } 
     else {
         fetch('https://pokeapi.co/api/v2/pokemon/'+name).then(result => {
@@ -92,7 +92,7 @@ function doSinglePokemonFetch(name) {
         console.log(json);
         pokemons[name] = json
         singlePokemonCard(json);
-        whileLoading();
+        loaded();
         }).catch(err => {
         console.log(err);
         }) 
@@ -170,7 +170,7 @@ function singlePokemonCard(pokemonDetail) {
     } 
 };
 
-function whileLoading() {
+function loaded() {
     document.querySelector('.wrapper').style.display = 'none';
     document.querySelector('.card-poke').style.display = 'flex'; // mostra la card quando la pagina è caricata
     document.querySelector('.loader').style.display = 'none'; //nasconde il loader quando la pagina è caricata
